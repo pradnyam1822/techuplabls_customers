@@ -14,4 +14,4 @@ import { NewPinComponent } from './new-pin/new-pin.component';
     CommonModule
   ]
 })
-export class CommonModule { }
+export class CommonComponentsModule { }

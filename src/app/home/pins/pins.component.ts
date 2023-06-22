@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
 import {NgIf} from '@angular/common';
 import {MatButtonModule} from '@angular/material/button';
-import { NewCustomerComponent } from 'src/app/common/new-customer/new-customer.component';
-import { NewPinComponent } from 'src/app/common/new-pin/new-pin.component';
+import { NewCustomerComponent } from 'src/app/common-components/new-customer/new-customer.component';
+import { NewPinComponent } from 'src/app/common-components/new-pin/new-pin.component';
 
 @Component({
   selector: 'app-pins',
