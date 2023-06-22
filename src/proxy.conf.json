@@ -1,0 +1,8 @@
+{
+    "/": {
+        "target": "https://api.first.org/data/v1/countries",
+        "secure": true,
+        "changeOrigin": true,
+        "logLevel": "debug"
+    }
+}
