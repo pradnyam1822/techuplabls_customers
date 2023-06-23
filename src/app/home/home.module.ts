@@ -4,6 +4,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxSelectModule } from 'ngx-select-ex';
+import {MatTableModule} from '@angular/material/table';
+import {MatButtonModule} from '@angular/material/button';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { PinsComponent } from './pins/pins.component';
@@ -17,7 +19,9 @@ import { PinsComponent } from './pins/pins.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgxSelectModule
+    NgxSelectModule,
+    MatTableModule,
+    MatButtonModule
   ],
   exports: [
     CommonModule,

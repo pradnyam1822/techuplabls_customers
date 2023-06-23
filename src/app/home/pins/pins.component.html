@@ -1,3 +1,51 @@
-<p>pins works!</p>
-<button mat-button (click)="createCustomer()">+ Add Customer</button>
-<button mat-button (click)="createPin()">+ Add Pin</button>
+<div class="container">
+    <div class="header-grid">
+        <h3>List of pins</h3>
+        <div class="btn-wrap">
+            <button mat-button (click)="createCustomer()">+ Add Customer</button>
+            <button mat-button (click)="createPin()">+ Add Pin</button>
+        </div>
+    </div>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="isPinsData;else showNoTableData">
+
+        <!-- title Column -->
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef>
+            Title
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+        </ng-container>
+      
+        <!-- image Column -->
+        <ng-container matColumnDef="image">
+          <th mat-header-cell *matHeaderCellDef>
+            Image
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.image}} </td>
+        </ng-container>
+      
+        <!-- collaboratory Column -->
+        <ng-container matColumnDef="collaboratory">
+          <th mat-header-cell *matHeaderCellDef>
+              Collaboratory
+          </th>
+          <td mat-cell *matCellDef="let element"> 
+            <div *ngFor="let collab of element.collaboratory">{{collab}}</div>
+          </td>
+        </ng-container>
+      
+        <!-- privacy Column -->
+        <ng-container matColumnDef="privacy">
+          <th mat-header-cell *matHeaderCellDef>
+            Privacy
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.privacy}} </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    <ng-template #showNoTableData>
+        <div>No data available. Please add customers and pins</div>
+    </ng-template>
+</div>

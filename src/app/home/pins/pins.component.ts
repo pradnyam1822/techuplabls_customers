@@ -4,6 +4,7 @@ import {NgIf} from '@angular/common';
 import {MatButtonModule} from '@angular/material/button';
 import { CreateCustomerComponent } from 'src/app/common-forms/create-customer/create-customer.component';
 import { CreatePinComponent } from 'src/app/common-forms/create-pin/create-pin.component';
+import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
   selector: 'app-pins',
@@ -12,13 +13,25 @@ import { CreatePinComponent } from 'src/app/common-forms/create-pin/create-pin.c
 })
 export class PinsComponent implements OnInit {
 
+  displayedColumns: string[] = ['title', 'image', 'collaboratory', 'privacy'];
+  dataSource = new MatTableDataSource();
+  isPinsData = false;
+
   constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    // var pinsData:any = [];
-    // localStorage.setItem('pinsData', JSON.stringify(pinsData));
-    // var custData:any = [];
-    // localStorage.setItem('custData', JSON.stringify(custData));
+    this.getPinsData();
+  }
+
+  getPinsData() {
+    var pinsData = localStorage.getItem('pinsData');
+    if(pinsData != null && JSON.parse(pinsData).length > 0) {
+      this.dataSource = new MatTableDataSource(JSON.parse(pinsData));
+      this.isPinsData = true;
+    }
+    else {
+      this.isPinsData = false;
+    }
   }
 
   ngOnDestroy() {
@@ -34,7 +47,7 @@ export class PinsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      // console.log(`Dialog result: ${result}`);
     });
   }
 
@@ -46,7 +59,10 @@ export class PinsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      // console.log(`Dialog result: ${result}`);
+      if(result == 'new') {
+        this.getPinsData();
+      }
     });
   }
 
