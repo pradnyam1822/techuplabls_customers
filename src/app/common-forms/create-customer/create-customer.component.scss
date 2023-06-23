@@ -1,0 +1,16 @@
+.customer-form-wrap {
+    padding: 2rem 1rem;
+    label {
+        align-self: center;
+    }
+    .custom-grid {
+        display: grid;
+        grid-template-columns: 20% 80%;
+    }
+    .select-wrap {
+        margin-bottom: 1rem;
+    }
+    .btn-wrap {
+        text-align: center;
+    }
+}

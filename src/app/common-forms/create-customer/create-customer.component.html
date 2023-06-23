@@ -1,0 +1,50 @@
+
+<section class="customer-form-wrap">
+    <div class="custom-grid">
+        <label>Title* : </label>
+        <mat-form-field appearance="outline">
+        <input matInput placeholder="John Doe" [formControl]="name" required>
+        <mat-error *ngIf="name.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+    </div>
+    <div class="custom-grid">
+        <label>Email* : </label>
+        <mat-form-field appearance="outline">
+        <input matInput placeholder="pat@example.com" [formControl]="email" required>
+        <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+    </div>
+    <div class="select-wrap custom-grid">
+        <label>Region* : </label>
+        <span>
+            <ngx-select [formControl]="selectRegion"
+                    [allowClear]="true"
+                    [defaultValue]="doNgxDefault()"
+                    [items]="regionArr"
+                    placeholder="No region selected"
+                    (selectionChanges)="selectedRegion($event)"
+                    >
+            </ngx-select>
+        </span>
+    </div>
+    <div class="select-wrap custom-grid">
+        <label>Country* : </label>
+        <span>
+            <ngx-select [formControl]="selectCountry"
+            [allowClear]="true"
+            [defaultValue]="doNgxDefault()"
+            [disabled]="isSelectCountryDisabled"
+            [items]="countryArr"
+            placeholder="No country selected"
+            (selectionChanges)="selectedCountry($event)"
+            >
+            </ngx-select>
+        </span>
+    </div>
+    <div class="btn-wrap">
+        <button mat-button (click)="cancel()">Cancel</button>
+        <button mat-raised-button color="primary" (click)="createCustomer()" [disabled]="getSubmitDisabled()">
+            Create Customer
+        </button>
+    </div>
+</section>

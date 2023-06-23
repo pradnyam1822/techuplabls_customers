@@ -1,23 +1,31 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {MatDialogModule} from '@angular/material/dialog';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { NgxSelectModule } from 'ngx-select-ex';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { PinsComponent } from './pins/pins.component';
-import {MatDialogModule} from '@angular/material/dialog';
-import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
-  declarations: [
-    PinsComponent
-  ],
   imports: [
     CommonModule,
     HomeRoutingModule,
     MatDialogModule,
+    FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
-  ]
+    HttpClientModule,
+    NgxSelectModule
+  ],
+  exports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule
+  ],
+  declarations: [
+    PinsComponent
+  ],
 })
 export class HomeModule { }

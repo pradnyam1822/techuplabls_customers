@@ -1,0 +1,9 @@
+<ngx-select [formControl]="selectCust"
+                    [allowClear]="true"
+                    [defaultValue]="doNgxDefault()"
+                    [items]="custArr"
+                    [multiple] = 'true'
+                    placeholder="No region selected"
+                    (selectionChanges)="selectedCust($event)"
+                    >
+        </ngx-select>
