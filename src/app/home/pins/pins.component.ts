@@ -15,16 +15,26 @@ export class PinsComponent implements OnInit {
   constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    
+    // var pinsData:any = [];
+    // localStorage.setItem('pinsData', JSON.stringify(pinsData));
+    // var custData:any = [];
+    // localStorage.setItem('custData', JSON.stringify(custData));
+  }
+
+  ngOnDestroy() {
+    localStorage.removeItem('pinsData');
+    localStorage.removeItem('custData');
   }
 
   createCustomer() {
     const dialogRef = this.dialog.open(CreateCustomerComponent,{
       hasBackdrop: true,
+      width: '60%',
+      height: '70%'
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+      console.log(`Dialog result: ${result}`);
     });
   }
 
@@ -32,7 +42,7 @@ export class PinsComponent implements OnInit {
     const dialogRef = this.dialog.open(CreatePinComponent,{
       hasBackdrop: true,
       width: '60%',
-      height: '50%'
+      height: '80%'
     });
 
     dialogRef.afterClosed().subscribe(result => {

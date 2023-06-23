@@ -1,9 +1,141 @@
-<ngx-select [formControl]="selectCust"
-                    [allowClear]="true"
-                    [defaultValue]="doNgxDefault()"
-                    [items]="custArr"
-                    [multiple] = 'true'
-                    placeholder="No region selected"
-                    (selectionChanges)="selectedCust($event)"
+<section class="customer-form-wrap">
+    <div class="custom-grid">
+        <label>Title* : </label>
+        <mat-form-field appearance="outline">
+        <input matInput placeholder="" [formControl]="name" required>
+        <mat-error *ngIf="name.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+    </div>
+    <div class="select-wrap custom-grid">
+        <label>Select Collaboratory* : </label>
+        <span>
+            <ngx-select [formControl]="selectCust"
+                [allowClear]="true"
+                [defaultValue]="doNgxDefault()"
+                [items]="custArr"
+                [multiple] = 'true'
+                placeholder="No collaboratory selected"
+                (selectionChanges)="selectedCust($event)"
+                >
+            </ngx-select>
+        </span>
+    </div>
+    <div class="image-wrap">
+        <div class="custom-grid">
+            <label>Select Image* : </label>
+            <div class="img-drop-box">
+                <div ng2FileDrop
+                    [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
+                    (fileOver)="fileOverBase($event)"
+                    [uploader]="uploader"
+                    class="well my-drop-zone">
+                Choose or Drag n Drop File here
+            </div>
+            <input class="fileInput" type="file" ng2FileSelect [uploader]="uploader" />
+            </div>
+        </div>
+        <div class="" style="margin-bottom: 40px" *ngIf="uploader?.queue?.length">
+            <h3>Upload queue</h3>
+            <p>Queue length: {{ uploader?.queue?.length }}</p>
+      
+            <table class="table">
+              <thead>
+                <tr>
+                  <th width="50%">Name</th>
+                  <th>Size</th>
+                  <th>Progress</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of uploader.queue">
+                  <td>
+                    <strong>{{ item?.file?.name }}</strong>
+                  </td>
+                  <td  nowrap>
+                    {{ item?.file?.size / 1024 / 1024 | number: '.2' }} MB
+                  </td>
+                  <td >
+                    <div class="progress" style="margin-bottom: 0;">
+                      <div
+                        class="progress-bar"
+                        role="progressbar"
+                        [ngStyle]="{ width: item.progress + '%' }"
+                      ></div>
+                    </div>
+                  </td>
+                  <td class="text-center">
+                    <span *ngIf="item.isSuccess"
+                      ><i class="glyphicon glyphicon-ok"></i
+                    ></span>
+                    <span *ngIf="item.isCancel"
+                      ><i class="glyphicon glyphicon-ban-circle"></i
+                    ></span>
+                    <span *ngIf="item.isError"
+                      ><i class="glyphicon glyphicon-remove"></i
+                    ></span>
+                  </td>
+                  <td nowrap>
+                    <button
+                      type="button"
+                      class="btn btn-success btn-xs"
+                      (click)="item.upload()"
+                      [disabled]="item.isReady || item.isUploading || item.isSuccess"
                     >
-        </ngx-select>
+                      <span class="glyphicon glyphicon-upload"></span> Upload
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-warning btn-xs"
+                      (click)="item.cancel()"
+                      [disabled]="!item.isUploading"
+                    >
+                      <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-danger btn-xs"
+                      (click)="item.remove()"
+                    >
+                      <span class="glyphicon glyphicon-trash"></span> Remove
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+      
+            <div>
+              <div>
+                Queue progress:
+                <div class="progress" style="">
+                  <div
+                    class="progress-bar"
+                    role="progressbar"
+                    [ngStyle]="{ width: uploader.progress + '%' }"
+                  ></div>
+                </div>
+              </div>
+              
+              
+            </div>
+          </div>
+    </div>
+    <div class="custom-grid">
+        <label>Privacy* : </label>
+        <mat-radio-group
+        aria-labelledby="example-radio-group-label"
+        class="custom-radio-group"
+        [(ngModel)]="selectedPrivacy">
+        <mat-radio-button class="custom-radio-button" *ngFor="let privacy of privacyOptions" [value]="privacy">
+            {{privacy}}
+        </mat-radio-button>
+        </mat-radio-group>
+    </div>
+    <div class="btn-wrap">
+        <button mat-button (click)="cancel()">Cancel</button>
+        <button mat-raised-button color="primary" (click)="createPin()" [disabled]="getSubmitDisabled()">
+            Create Pin
+        </button>
+    </div>
+</section>

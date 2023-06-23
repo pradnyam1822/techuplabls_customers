@@ -84,26 +84,33 @@ export class CreateCustomerComponent implements OnInit {
 
   createCustomer() {
     var custData = [];
-    var a = localStorage.getItem('pinsData');
+    var a = localStorage.getItem('custData');
     custData = (a != null && a != undefined) ? JSON.parse(a) : [];
     if(custData.length > 0) {
       // check if customer with same title exists
       var isDuplicateCustomer = custData.filter((a:any)=> a.title == this.name.value).length;
       if(isDuplicateCustomer == 0) {
-        var obj = {title:'', email:'', region:'', country:''};
-        obj.title = this.name.value;
-        obj.email = this.email.value;
-        obj.region = this.selectRegion.value ? this.selectRegion.value : '';
-        obj.country = this.selectCountry.value ? this.selectCountry.value : '';
-        custData.push(obj);
-        localStorage.setItem('pinsData', JSON.stringify(custData));
-        this.dialogRef.close('new');
-        window.alert('Customer created successfully.');
+       this.addCustomer(custData);
       }
       else {
         window.alert('Customer with this title already exists. Please try another title.');
       }
     }    
+    else {
+      this.addCustomer(custData);
+    }
+  }
+
+  addCustomer(custData:any) {
+    var obj = {title:'', email:'', region:'', country:''};
+    obj.title = this.name.value;
+    obj.email = this.email.value;
+    obj.region = this.selectRegion.value ? this.selectRegion.value : '';
+    obj.country = this.selectCountry.value ? this.selectCountry.value : '';
+    custData.push(obj);
+    localStorage.setItem('custData', JSON.stringify(custData));
+    this.dialogRef.close('new');
+    window.alert('Customer created successfully.');
   }
 
   getSubmitDisabled() {

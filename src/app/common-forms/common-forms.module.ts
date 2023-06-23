@@ -6,6 +6,8 @@ import { NgxSelectModule, INgxSelectOptions } from 'ngx-select-ex';
 import { MatInputModule } from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
+import {MatRadioModule} from '@angular/material/radio';
+import { FileUploadModule } from 'ng2-file-upload';
 
 import { CommonFormsRoutingModule } from './common-forms-routing.module';
 import { CreateCustomerComponent } from './create-customer/create-customer.component';
@@ -26,7 +28,9 @@ const CustomSelectOptions: INgxSelectOptions = { // Check the interface for more
     NgxSelectModule.forRoot(CustomSelectOptions),
     MatInputModule,
     MatFormFieldModule,
-    MatButtonModule
+    MatButtonModule,
+    MatRadioModule,
+    FileUploadModule
   ],
   declarations: [
     CreateCustomerComponent,
